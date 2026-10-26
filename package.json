@@ -1,0 +1,17 @@
+{
+  "name": "entrypoints",
+  "module": "src/main.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "typecheck": "bun check",
+    "format": "prettier --write --experimental-cli --ignore-path .prettierignore ."
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "prettier": "^3.9.10"
+  },
+  "peerDependencies": {
+    "typescript": "^7"
+  }
+}

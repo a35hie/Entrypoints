@@ -1,0 +1,13 @@
+.gitignore
+.prettierignore
+dist
+node_modules
+bun.lock
+LICENSE.txt
+README.md
+.env.example
+.vscode
+.idea
+public
+.output
+.nuxt
