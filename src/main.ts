@@ -1,5 +1,11 @@
-import type { Entrypoint } from './types/config.ts'
+import type { Entrypoint } from './types/config'
 
-export function defineEntrypoint(entrypoint: Entrypoint) {
+export type {
+  Entrypoint,
+  EntrypointButton,
+  EntrypointButtonType,
+} from './types/config'
+
+export function defineEntrypoint(entrypoint: Entrypoint): Entrypoint {
   return entrypoint
 }

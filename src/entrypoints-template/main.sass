@@ -1,0 +1,86 @@
+:root
+  --backgroundColor: #c1aef3
+  --foregroundColor: rgba(196, 196, 196, 0.3)
+  --foregroundOpaque: rgb(162, 143, 201)
+
+  --textColor: rgba(0, 0, 0, 0.9)
+  --accentColor: rgb(159, 117, 232)
+  --shadowColor: rgba(244, 226, 255, 0.8)
+
+  --buttonLighten: rgba(255, 255, 255, 0.3)
+  --buttonDarken: rgba(0, 0, 0, 0.2)
+  --buttonGlow: rgba(255, 255, 255, 0.1)
+
+@media (prefers-color-scheme: dark)
+  :root
+    --backgroundColor: #0c0023
+    --foregroundColor: rgba(134, 134, 134, 0.3)
+    --foregroundOpaque: rgb(69, 53, 89)
+
+    --textColor: rgba(240, 240, 240, 0.9)
+    --accentColor: rgb(90, 20, 209)
+    --shadowColor: rgba(155, 132, 220, 0.8)
+
+    --buttonLighten: rgb(185 178 195 / 0.2)
+    --buttonDarken: rgba(0, 0, 0, 0.4)
+    --buttonGlow: rgb(185 178 195 / 0.1)
+
+*, *::before, *::after
+  font-family: "Nata Sans", sans-serif
+  box-sizing: border-box
+
+body
+  display: flex
+  justify-content: center
+  align-items: center
+  background: var(--backgroundColor)
+  color: var(--textColor)
+  height: 100vh
+  width: 100vw
+  overflow: hidden
+  margin: 0
+
+.entrypoint
+  width: 100%
+  max-width: 35rem
+  padding: 1rem
+
+h1
+  margin: 0.5rem 0 0.25rem
+
+a
+  text-decoration: none
+
+.buttons
+  display: flex
+  gap: 0.5rem
+  flex-wrap: wrap
+
+button
+  --buttonRadius: 1.5rem
+
+  display: flex
+  align-items: center
+  justify-content: center
+  gap: 0.5rem
+
+  border: none
+  border-radius: var(--buttonRadius)
+  background: var(--foregroundColor)
+  box-shadow: inset 0 0.1rem 0.2rem var(--buttonLighten), inset 0 -0.1rem 0.2rem var(--buttonDarken), inset 0 0.2rem 0.3rem var(--buttonGlow)
+  font-size: medium
+  color: var(--textColor)
+  padding: 0.75rem
+  cursor: pointer
+  transition: 0.2s ease-in-out
+  position: relative
+
+  .button-icon, svg
+    width: 1.5rem
+    height: 1.5rem
+
+  &:not(.transparent)
+    &:hover
+      scale: 1.05
+    &:active
+      scale: 0.95
