@@ -58,7 +58,7 @@ function validateConfig(
     )
   }
 
-  const requiredStrings = ['dir', 'title', 'description'] as const
+  const requiredStrings = ['dir', 'title', 'description', 'favicon'] as const
   for (const key of requiredStrings) {
     if (typeof config[key] !== 'string' || config[key].length === 0) {
       throw new Error(`${configFile} requires a non-empty string for "${key}".`)

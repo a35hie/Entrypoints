@@ -3,11 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="{{ config.favicon }}" />
     <title>{{ config.title }}</title>
     <meta name="description" content="{{ config.description }}" />
   </head>
   <body>
     <main class="entrypoint">
+      <img src="{{ config.favicon }}" alt="Logo" class="logo" />
       <h1>{{ config.title }}</h1>
       <p>{{ config.description }}</p>
       <div class="buttons">{{ config.buttons }}</div>

@@ -11,5 +11,6 @@ export interface Entrypoint {
   dir: string
   title: string
   description: string
+  favicon: string
   buttons: EntrypointButton[]
 }

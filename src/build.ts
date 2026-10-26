@@ -1,6 +1,6 @@
 import { existsSync } from 'node:fs'
-import { readFile } from 'node:fs/promises'
-import { dirname, join, resolve } from 'node:path'
+import { copyFile, mkdir, readFile } from 'node:fs/promises'
+import { dirname, isAbsolute, join, relative, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { compile } from 'sass'
 import { build, type Plugin } from 'vite'
@@ -25,6 +25,7 @@ export async function createEntrypoint({
   const { templatePath, sassPath } = resolveTemplatePaths(root)
 
   const outputDirectory = resolve(root, config.dir)
+  await copyRelativeFavicon(root, outputDirectory, config.favicon)
 
   await build({
     // Treat the template directory as Vite's root so the single HTML entry is emitted
@@ -47,6 +48,37 @@ export async function createEntrypoint({
   })
 }
 
+async function copyRelativeFavicon(
+  root: string,
+  outputDirectory: string,
+  favicon: string
+): Promise<void> {
+  if (isExternalReference(favicon) || isAbsolute(favicon)) return
+
+  const source = resolve(root, favicon)
+  const outputPath = relative(root, source)
+  const destination = resolve(outputDirectory, outputPath)
+  const destinationRelativeToOutput = relative(outputDirectory, destination)
+
+  if (
+    destinationRelativeToOutput === '..' ||
+    destinationRelativeToOutput.startsWith('..')
+  ) {
+    throw new Error(
+      `The favicon path "${favicon}" must resolve inside the project root.`
+    )
+  }
+
+  if (source === destination) return
+
+  await mkdir(dirname(destination), { recursive: true })
+  await copyFile(source, destination)
+}
+
+function isExternalReference(value: string): boolean {
+  return /^(?:data:|https?:|\/\/)/i.test(value)
+}
+
 function resolveTemplatePaths(root: string): {
   templatePath: string
   sassPath: string
@@ -67,7 +99,7 @@ function resolveTemplatePaths(root: string): {
   }
 
   throw new Error(
-    `Could not find src/entrypoints-template/index.html and src/entrypoints-template/main.sass in the project or the Entrypoints library.`,
+    `Could not find src/entrypoints-template/index.html and src/entrypoints-template/main.sass in the project or the Entrypoints library.`
   )
 }
 
@@ -98,7 +130,6 @@ function entrypointTemplatePlugin({
 
       return htmlWithStyles
     },
-
   }
 }
 

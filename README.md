@@ -11,6 +11,7 @@ This repo is for generating basic entrypoint pages for my web-related projects w
      dir: 'dist',
      title: 'ash\'s Fonts',
      description: 'My hosted webfont collection.',
+     favicon: 'favicon.svg',
      buttons: [
        { 
          type: 'prominent', 
@@ -34,3 +35,5 @@ entrypoints create --config config/entrypoints.ts
 ```
 
 The built-in template in `src/entrypoints-template` is also a small starting point for a project-specific template. Its button classes are `button standard`, `button transparent`, and `button prominent`.
+
+Relative favicon paths are resolved from the project root and copied into the configured output directory, preserving their relative path. Absolute URLs, root URLs, and data URLs are left unchanged.
