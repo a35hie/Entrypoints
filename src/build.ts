@@ -8,6 +8,7 @@ import { minify } from 'html-minifier-terser'
 import type { Entrypoint, EntrypointButton } from './types/config'
 
 const TEMPLATE_DIRECTORY = join('src', 'entrypoints-template')
+const BUNDLED_TEMPLATE_DIRECTORY = 'entrypoints-template'
 const TEMPLATE_FILE = join(TEMPLATE_DIRECTORY, 'index.html')
 const SASS_FILE = join(TEMPLATE_DIRECTORY, 'main.sass')
 
@@ -85,7 +86,12 @@ function resolveTemplatePaths(root: string): {
 } {
   const templateDirectories = [
     resolve(root, TEMPLATE_DIRECTORY),
-    // This supports running the source CLI directly and the published package.
+    // Prefer the copied template in dist for the published package.
+    resolve(
+      dirname(fileURLToPath(import.meta.url)),
+      BUNDLED_TEMPLATE_DIRECTORY
+    ),
+    // This supports running the source CLI directly from the repository.
     resolve(dirname(fileURLToPath(import.meta.url)), '..', TEMPLATE_DIRECTORY),
   ]
 

@@ -1,10 +1,25 @@
+import { cp } from 'node:fs/promises'
 import { resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { defineConfig } from 'vite'
+import { defineConfig, type Plugin } from 'vite'
 
 const projectRoot = fileURLToPath(new URL('.', import.meta.url))
 
+function copyBundledTemplate(): Plugin {
+  return {
+    name: 'copy-bundled-entrypoints-template',
+    async closeBundle() {
+      await cp(
+        resolve(projectRoot, 'src/entrypoints-template'),
+        resolve(projectRoot, 'dist/entrypoints-template'),
+        { recursive: true, force: true }
+      )
+    },
+  }
+}
+
 export default defineConfig({
+  plugins: [copyBundledTemplate()],
   build: {
     lib: {
       entry: {
