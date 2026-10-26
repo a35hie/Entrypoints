@@ -1,6 +1,6 @@
 {
   "name": "@a35hie/entrypoints",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "type": "module",
   "description": "Generate self-contained HTML entrypoint pages from a template and typed config.",
   "main": "./dist/index.js",
