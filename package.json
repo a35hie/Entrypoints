@@ -6,6 +6,7 @@
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "repository": "https://github.com/a35hie/Entrypoints",
   "bin": {
     "entrypoints": "./dist/cli.js"
   },
