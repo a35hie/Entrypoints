@@ -2,10 +2,10 @@
 This repo is for generating basic entrypoint pages for my web-related projects which aren't websites.
 
 ## How To Use
-1. Add the package: `bun add -d entrypoints`
+1. Add the package: `bun add -d @a35hie/entrypoints`
 2. Add your config at `entrypoints.config.ts`:
    ```ts
-   import { defineEntrypoint } from 'entrypoints'
+   import { defineEntrypoint } from '@a35hie/entrypoints'
    
    export default defineEntrypoint({
      dir: 'dist',
